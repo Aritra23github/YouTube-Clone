@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { toggleSideBar } from '../utils/appSlice';
 
 const Head = () => {
+    const [searchQuery, setSearchQuery] = useState("");
     const dispatch = useDispatch();
 
     const toggleSideBarMenu = () => {
         dispatch(toggleSideBar());
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log(searchQuery);
+        }, 2000);
+    }, [searchQuery]);
 
   return (
     <div className='grid grid-flow-col p-5 m-2 shadow-lg'>    
@@ -30,6 +37,8 @@ const Head = () => {
             <input 
                 className='w-1/2 border border-gray-400 p-2 rounded-l-full'
                 type="text" 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button 
                 className='border border-gray-400 px-5 py-2 rounded-r-full bg-gray-100'
